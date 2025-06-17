@@ -1,0 +1,51 @@
+import re
+
+def student_help_desk_bot():
+    print("Welcome to the Student Help Desk Chatbot!")
+    print("Type 'exit' to end the conversation.\n")
+
+    while True:
+        try:
+            user_input = input("You: ").strip().lower()
+        except EOFError:  # Handles unexpected input issues
+            print("\nBot: No input detected. Exiting...")
+            break
+
+        # Greeting response from the second code
+        if user_input in ["hi", "hello"]:
+            print("Bot: Hello! How can I assist you today? You can ask about office hours, scholarships, exams, and more.")
+
+        # Match office hours questions
+        elif re.search(r'\boffice hours\b', user_input) or any(word in user_input for word in ["office", "hours", "open"]):
+            print("Bot: Office hours are from 9 AM to 5 PM, Monday to Friday. You can visit the administrative office during these hours for assistance.")
+
+        # Match scholarship questions
+        elif re.search(r'\bscholarship\b', user_input) or any(word in user_input for word in ["scholarship", "financial aid"]):
+            print("Bot: Apply for scholarships via the university portal under 'Financial Aid'.")
+
+        # Match library questions
+        elif re.search(r'\blibrary\b', user_input) or any(word in user_input for word in ["library", "books", "reading room"]):
+            print("Bot: Library is in Block B, 2nd Floor, open 8 AM to 8 PM.")
+
+        # Match Head of Department questions
+        elif re.search(r'\b(hod|head of department)\b', user_input) or "head" in user_input:
+            print("Bot: The current HOD of CSE is Dr. Anil Kumar.")
+
+        # Match technical support questions
+        elif re.search(r'\btechnical support\b', user_input) or any(word in user_input for word in ["technical support", "help desk", "support"]):
+            print("Bot: Contact support@university.edu or call 123-456-7890. Visit IT help desk in Block A, Room 105.")
+
+        # Match exam schedule questions
+        elif re.search(r'\bexam schedule\b', user_input) or any(word in user_input for word in ["exam", "schedule", "test dates"]):
+            print("Bot: The exam schedule is available on the university portal under the 'Exams' section.")
+
+        # Exit condition
+        elif user_input == "exit":
+            print("Bot: Thanks for using the help desk chatbot! Goodbye!")
+            break
+
+        else:
+            print("Bot: I didn’t understand. Please try asking something else.")
+
+if _name_ == "_main_":
+    student_help_desk_bot()
